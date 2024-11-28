@@ -1,0 +1,186 @@
+/* src/Library.css */
+
+/* Container Styles */
+.library-container {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center align children horizontally */
+    justify-content: center; /* Center align children vertically */
+    padding: 20px; /* Space inside the container */
+    background-color: transparent; /* Background is transparent */
+    min-height: 100vh; /* Full height of the viewport */
+    position: relative; /* Positioning context for child elements */
+    overflow: hidden; /* Hide overflow */
+    border-left: 16px solid darkgreen; /* Left border */
+    border-right: 16px solid darkgreen; /* Right border */
+    border-radius: 0; /* Angular corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin: 0px; /* No space around the container */
+    padding-top: 36px; /* Space for the fixed top border */
+    padding-bottom: 36px; /* Space for the fixed bottom border */
+}
+
+/* Fixed top border */
+.fixed-top-border {
+    position: fixed; /* Fixed position */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    right: 0; /* Align to the right */
+    height: 16px; /* Height of the border */
+    background-color: darkgreen; /* Color of the border */
+    z-index: 1; /* Ensure it is above other content */
+}
+
+/* Fixed bottom border */
+.fixed-bottom-border {
+    position: fixed; /* Fixed position */
+    bottom: 0; /* Align to the bottom */
+    left: 0; /* Align to the left */
+    right: 0; /* Align to the right */
+    height: 16px; /* Height of the border */
+    background-color: darkgreen; /* Color of the border */
+    z-index: 1; /* Ensure it is above other content */
+}
+
+/* Header Styles */
+.library-header,
+.add-book-header,
+.your-books-header {
+    color: #444; /* Slightly darker text color */
+    font-weight: bold; /* Bold font for emphasis */
+    text-align: center; /* Center align the text */
+}
+
+.library-header {
+    font-size: 2.5rem; /* Larger font size for the header */
+    margin-bottom: 20px;
+}
+
+.add-book-header,
+.your-books-header {
+    font-size: 2rem; /* Font size for section headings */
+    margin: 20px 0; /* Space above and below */
+}
+
+/* Form Styles */
+.add-book-form {
+    background-color: #fff; /* White background for the form */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding for the form */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 100%;
+    max-width: 500px; /* Limit form width */
+    margin: 0 auto 20px; /* Center the form */
+}
+
+.book-input {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px; /* Padding for inputs */
+    margin: 10px 0; /* Space between inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in total width */
+}
+
+.book-input::placeholder {
+    color: #aaa; /* Placeholder text color */
+}
+
+/* Search and Sort Styles */
+.search-input {
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    max-width: 500px; /* Limit input width */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.sort-select {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button Styles */
+button {
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding for buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1rem; /* Font size */
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.submit-button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text color */
+}
+
+.submit-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.sign-out-button {
+    position: absolute; /* Position the button absolutely */
+    top: 20px; /* Distance from the top */
+    right: 20px; /* Distance from the right */
+    background-color: red; /* Red background */
+    color: white; /* White text color */
+    border-radius: 25px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for the button */
+}
+
+.sign-out-button:hover {
+    background-color: darkred; /* Darker red on hover */
+}
+
+/* Book List Styles */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between cards */
+    width: 100%; /* Full width for the grid */
+    max-width: 600px; /* Limit grid width */
+}
+
+.book-card {
+    background-color: #fff; /* White background for items */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px; /* Padding for items */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.2s; /* Smooth transition for hover effect */
+}
+
+.book-card:hover {
+    transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+.book-title {
+    font-size: 1.5rem; /* Font size for book title */
+    margin: 0; /* Remove default margin */
+}
+
+.book-author,
+.book-isbn {
+    margin: 5px 0; /* Space between author and ISBN */
+}
+
+/* Wave Background Styles */
+.wave-container {
+    position: fixed; /* Fixed position to stay in place while scrolling */
+    bottom: -4; /* Align it to the bottom */
+    left: 0;
+    width: 100%;
+    height: 50vh; /* Half of the viewport height */
+    z-index: -1; /* Behind other content */
+    overflow: hidden; /* Hide any overflow */
+}
+
+.wave-background {
+    width: 100%; /* Make the wave image responsive */
+    height: auto; /* Maintain aspect ratio */
+}

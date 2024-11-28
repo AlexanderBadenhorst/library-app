@@ -1,0 +1,107 @@
+/* src/Auth.css */
+
+/* Container Styles */
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f0f4f8; /* Light background color */
+    min-height: 100vh; /* Full height of the viewport */
+    position: relative; /* Relative positioning for absolute children */
+    overflow: hidden; /* Hide any overflow */
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Set the height to the full viewport height */
+}
+
+/* Add the wave background */
+.auth-container::before {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Position it at the bottom */
+    left: 50%;
+    transform: translateX(-50%); /* Center it horizontally */
+    width: 100%; /* Full width */
+    height: auto; /* Auto height to maintain aspect ratio */
+    max-height: 300px; /* Set a maximum height for the wave */
+    background-image: url('./images/background.svg'); /* Ensure this path is correct */
+    background-size: cover; /* Cover the area */
+    background-repeat: no-repeat; /* Prevent repeating */
+    z-index: -1; /* Send the wave behind other content */
+}
+
+/* Header Styles */
+.auth-header {
+    color: #444; /* Slightly darker text color */
+    font-weight: bold; /* Bold font for emphasis */
+    font-size: 2.5rem; /* Larger font size for the header */
+    margin-bottom: 20px; /* Space below the header */
+}
+
+
+
+/* Input Styles */
+input[type="email"],
+input[type="password"] {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px; /* Padding for inputs */
+    margin: 10px 0; /* Space between inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in total width */
+}
+
+input::placeholder {
+    color: #aaa; /* Placeholder text color */
+}
+
+/* Button Styles */
+button {
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding for buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1rem; /* Font size */
+    transition: background-color 0.3s; /* Transition for hover effect */
+    width: 100%; /* Full width for buttons */
+    max-width: 200px; /* Limit button width */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Sign Up Button */
+button.sign-up {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text color */
+}
+
+/* Sign In Button */
+button.sign-in {
+    background-color: #28a745; /* Bootstrap success color */
+    color: white; /* White text color */
+}
+
+/* Error Message Styles */
+.error-message {
+    color: red; /* Red color for error messages */
+    margin-top: 10px; /* Space above error message */
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .auth-container {
+        padding: 10px; /* Reduce padding on smaller screens */
+    }
+
+    .auth-header {
+        font-size: 2rem; /* Smaller font size for header */
+    }
+
+    button {
+        width: 100%; /* Full width for buttons on small screens */
+    }
+}
