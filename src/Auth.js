@@ -1,4 +1,3 @@
-// src/Auth.js
 import React, { useState, useEffect } from "react";
 import { auth, db } from "./firebase"; // Import auth and db objects
 import {
@@ -67,7 +66,10 @@ const Auth = ({ currentUser }) => {
   };
 
   return (
-    <div className="auth-container" style={{ backgroundImage: `url(${background})` }}>
+    <div
+      className="auth-container"
+      style={{ backgroundImage: `url(${background})` }}
+    >
       <div
         className="auth-background"
         style={{ backgroundImage: `url(${background})` }}

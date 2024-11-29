@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db, auth } from "./firebase"; 
+import { db, auth } from "./firebase";
 import {
   collection,
   addDoc,
@@ -7,13 +7,12 @@ import {
   doc,
   onSnapshot,
   setDoc,
-  getDocs,
 } from "firebase/firestore";
-import { signOut } from "firebase/auth"; 
-import { useNavigate } from "react-router-dom"; 
-import "./Library.css"; 
-import waveImage from './images/wave.svg';
-import waveImage2 from './images/wave2.svg';
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import "./Library.css";
+import waveImage from "./images/wave.svg";
+import waveImage2 from "./images/wave2.svg";
 
 const BookForm = ({ book, onChange, onSubmit, error }) => (
   <div className="add-book-form">
@@ -58,7 +57,7 @@ const BookItem = ({ book, onEdit, onDelete }) => (
   </div>
 );
 
-const Library = ({ currentUser  }) => {
+const Library = ({ currentUser }) => {
   const [books, setBooks] = useState([]);
   const [book, setBook] = useState({ title: "", author: "", isbn: "" });
   const [error, setError] = useState("");
@@ -70,12 +69,12 @@ const Library = ({ currentUser  }) => {
     const unsubscribe = onSnapshot(collection(db, "library"), (snapshot) => {
       const bookList = snapshot.docs
         .map((doc) => ({ id: doc.id, ...doc.data() }))
-        .filter((book) => book.userId === currentUser .uid);
+        .filter((book) => book.userId === currentUser.uid);
       setBooks(bookList);
     });
 
     return () => unsubscribe();
-  }, [currentUser .uid]);
+  }, [currentUser.uid]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -95,14 +94,14 @@ const Library = ({ currentUser  }) => {
           title: book.title,
           author: book.author,
           isbn: book.isbn,
-          userId: currentUser .uid,
+          userId: currentUser.uid,
         });
       } else {
         await addDoc(collection(db, "library"), {
           title: book.title,
           author: book.author,
           isbn: book.isbn,
-          userId: currentUser .uid,
+          userId: currentUser.uid,
         });
       }
       setBook({ title: "", author: "", isbn: "" }); // Reset form
@@ -124,9 +123,10 @@ const Library = ({ currentUser  }) => {
   };
 
   const filteredBooks = books
-    .filter(book => 
-      book.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      book.author.toLowerCase().includes(searchTerm.toLowerCase())
+    .filter(
+      (book) =>
+        book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        book.author.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .sort((a, b) => a[sortOption].localeCompare(b[sortOption]));
 
@@ -141,46 +141,75 @@ const Library = ({ currentUser  }) => {
 
   return (
     <div className="library-container">
-          <div class="fixed-top-border"></div>
-          <div class="fixed-bottom-border"></div>
-        <div className="wave-container">
-            <img src={waveImage2} alt="Orange Wave Background" className="wave-background" style={{ position: 'fixed', top: 0, width: '100%', height: '50vh', zIndex: -1 }} />
-            <img src={waveImage} alt="Blue Wave Background" className="wave-background" style={{ position: 'fixed', bottom: 0, width: '100%', height: '50vh', zIndex: -1 }} />
-        </div>
-        <h1 class="library-header">Library</h1>
-        <button className="sign-out-button" onClick={handleSignOut}>Sign Out</button>
-        <h2 className="add-book-header">Add New Book</h2>
-        <BookForm book={book} onChange={handleChange} onSubmit={handleSubmit} error={error} />
-        
-        <h2 className="your-books-header">Your Books</h2>
-        <input 
-            type="text" 
-            placeholder="Search by title or author" 
-            value={searchTerm} 
-            onChange={(e) => setSearchTerm(e.target.value)} 
-            className="search-input"
+      <div class="fixed-top-border"></div>
+      <div class="fixed-bottom-border"></div>
+      <div className="wave-container">
+        <img
+          src={waveImage2}
+          alt="Orange Wave Background"
+          className="wave-background"
+          style={{
+            position: "fixed",
+            top: 0,
+            width: "100%",
+            height: "50vh",
+            zIndex: -1,
+          }}
         />
-        <select 
-            value={sortOption} 
-            onChange={(e) => setSortOption(e.target.value)} 
-            className="sort-select"
-        >
-            <option value="title">Sort by Title</option>
-            <option value="author">Sort by Author</option>
-        </select>
-        
-        <div className="book-grid">
-            {filteredBooks.map((book) => (
-                <BookItem
-                    key={book.id}
-                    book={book}
-                    onEdit={() => handleEdit(book)}
-                    onDelete={() => handleDelete(book.id)}
-                />
-            ))}
-        </div>
+        <img
+          src={waveImage}
+          alt="Blue Wave Background"
+          className="wave-background"
+          style={{
+            position: "fixed",
+            bottom: 0,
+            width: "100%",
+            height: "50vh",
+            zIndex: -1,
+          }}
+        />
+      </div>
+      <h1 class="library-header">Library</h1>
+      <button className="sign-out-button" onClick={handleSignOut}>
+        Sign Out
+      </button>
+      <h2 className="add-book-header">Add New Book</h2>
+      <BookForm
+        book={book}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        error={error}
+      />
+
+      <h2 className="your-books-header">Your Books</h2>
+      <input
+        type="text"
+        placeholder="Search by title or author"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-input"
+      />
+      <select
+        value={sortOption}
+        onChange={(e) => setSortOption(e.target.value)}
+        className="sort-select"
+      >
+        <option value="title">Sort by Title</option>
+        <option value="author">Sort by Author</option>
+      </select>
+
+      <div className="book-grid">
+        {filteredBooks.map((book) => (
+          <BookItem
+            key={book.id}
+            book={book}
+            onEdit={() => handleEdit(book)}
+            onDelete={() => handleDelete(book.id)}
+          />
+        ))}
+      </div>
     </div>
-);
+  );
 };
 
 export default Library;
